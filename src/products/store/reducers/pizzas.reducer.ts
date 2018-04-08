@@ -31,7 +31,9 @@ export function reducer(
         (entities: { [id: number]: Pizza }, pizza: Pizza) => {
           return {
             ...entities,
-            [pizza.id]: pizza
+            [pizza.id]: {
+              ...pizza
+            }
           };
         },
         {
@@ -51,27 +53,6 @@ export function reducer(
         loading: false,
         loaded: false
       };
-    }
-
-    case fromPizza.UPDATE_PIZZA_SUCCESS:
-    case fromPizza.CREATE_PIZZA_SUCCESS: {
-      const pizza = action.payload;
-      const entities = {
-        ...state.entities,
-        [pizza.id]: pizza
-      };
-      return {
-        ...state,
-        entities
-      }
-    }
-    case fromPizza.REMOVE_PIZZA: {
-      const pizza = action.payload;
-      const { [pizza.id]: removed, ...entities } = state.entities;
-      return {
-        ...state,
-        entities
-      }
     }
   }
   return state;
