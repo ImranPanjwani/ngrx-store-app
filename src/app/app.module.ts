@@ -3,12 +3,14 @@ import { BrowserModule } from '@angular/platform-browser';
 import { Routes, RouterModule } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { StoreRouterConnectingModule, RouterStateSerializer } from '@ngrx/router-store';
 import { StoreModule, MetaReducer } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 
+<<<<<<< HEAD
 import { reducer, CustomSerializer } from './store';
 
+=======
+>>>>>>> parent of bff50a3... Merge pull request #1 from ImranPanjwani/convert-to-store
 // not used in production
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { storeFreeze } from 'ngrx-store-freeze';
@@ -40,12 +42,16 @@ export const ROUTES: Routes = [
     BrowserModule,
     BrowserAnimationsModule,
     RouterModule.forRoot(ROUTES),
+<<<<<<< HEAD
     StoreModule.forRoot(reducer , { metaReducers }),
     EffectsModule.forRoot([]),
     StoreRouterConnectingModule,
+=======
+    StoreModule.forRoot({}, { metaReducers }),
+    EffectsModule.forRoot([]),
+>>>>>>> parent of bff50a3... Merge pull request #1 from ImranPanjwani/convert-to-store
     environment.development ? StoreDevtoolsModule.instrument() : [],
   ],
-  providers: [{provide: RouterStateSerializer, useClass: CustomSerializer}],
   declarations: [AppComponent],
   bootstrap: [AppComponent],
 })

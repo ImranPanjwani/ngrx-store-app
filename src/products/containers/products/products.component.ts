@@ -1,10 +1,7 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 
-import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs/observable';
-import * as fromStore from '../../store';
-
 import { Pizza } from '../../models/pizza.model';
+import { PizzasService } from '../../services/pizzas.service';
 
 @Component({
   selector: 'products',
@@ -19,11 +16,11 @@ import { Pizza } from '../../models/pizza.model';
         </a>
       </div>
       <div class="products__list">
-        <div *ngIf="!((pizzas$ | async)?.length)">
+        <div *ngIf="!((pizzas)?.length)">
           No pizzas, add one to get started.
         </div>
         <pizza-item
-          *ngFor="let pizza of (pizzas$ | async)"
+          *ngFor="let pizza of (pizzas)"
           [pizza]="pizza">
         </pizza-item>
       </div>
@@ -31,13 +28,19 @@ import { Pizza } from '../../models/pizza.model';
   `,
 })
 export class ProductsComponent implements OnInit {
-  pizzas$ : Observable<Pizza[]>;
+  pizzas: Pizza[];
 
-  constructor(private store: Store<fromStore.ProductsState>) {}
+  constructor(private pizzaService: PizzasService) {}
 
   ngOnInit() {
+<<<<<<< HEAD
     this.pizzas$ = this.store.select(fromStore.getAllPizzas);
     this.store.dispatch(new fromStore.LoadPizzas());
     // this.store.next()
+=======
+    this.pizzaService.getPizzas().subscribe(pizzas => {
+      this.pizzas = pizzas;
+    });
+>>>>>>> parent of bff50a3... Merge pull request #1 from ImranPanjwani/convert-to-store
   }
 }
